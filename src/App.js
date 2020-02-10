@@ -2,12 +2,14 @@ import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
 
-const listItems = [
-  {
-    name: 'Finish making Todo list',
-    id: 1
-  }
-];
+
+// const listItems = [
+//   {
+//     id: 1,
+//     name: 'Finish making Todo list',
+//     completed: false
+//   }
+// ];
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -17,13 +19,20 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      TodoList: listItems 
+      TodoList: []
     };
   }
 
-  toggleItem = clickedID => {
+  toggleItem = clickedId => {
     const newTodoList = this.state.TodoList.map(item => {
-      return item;
+      if (item.id === clickedId) {
+        return {
+          ...item,
+          completed: !item.completed
+        };
+      } else {
+        return item;
+      }
     });
 
     this.setState ({
@@ -41,6 +50,12 @@ class App extends React.Component {
     })
   }
 
+  clearCompleted = () => {
+    const newTodoList = this.state.TodoList.filter(item => !item.completed)
+    this.setState({
+      TodoList: newTodoList
+    })
+  }
 
   render() {
     console.log('rendering...');
@@ -50,8 +65,9 @@ class App extends React.Component {
           <h2>Welcome to your Todo App!</h2>
           <TodoForm addNewItem={this.addNewItem}/>
         </div>
-        <TodoList items={this.state.TodoList}
+        <TodoList items={this.state.TodoList} 
                   toggleItem={this.toggleItem}
+                  onClick={this.clearCompleted}
         />
       </React.Fragment>
     );
