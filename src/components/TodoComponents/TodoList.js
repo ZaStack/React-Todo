@@ -1,5 +1,14 @@
 import React from 'react';
 import Todo from "./Todo";
+import styled from 'styled-components';
+
+const ClearButton = styled.button`
+    background-color: blue;
+    color: white;
+    border-radius: 35px;
+    padding: 20px;
+    margin-top: 50px;
+`
 
 const TodoList = props => {
 
@@ -8,9 +17,9 @@ const TodoList = props => {
             {props.items.map(item => (
                 <Todo key={item.id} item={item} toggleItem={props.toggleItem}/>
             ))}
-            <button className="clear-btn" onClick={props.onClick}>
+            <ClearButton className="clear-btn" onClick={props.onClick}>
                 Clear Completed
-            </button>
+            </ClearButton>
         </div>
     );
 };

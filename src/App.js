@@ -1,15 +1,42 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
+import styled from 'styled-components'
+import './App.css'
 
 
-// const listItems = [
-//   {
-//     id: 1,
-//     name: 'Finish making Todo list',
-//     completed: false
-//   }
-// ];
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 1000px;
+  width: 1000px;
+  height: 100vh;
+  border: 1px solid green;
+  
+`
+const TopBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: red;
+  max-width: 100%;
+  width: 100%;
+  margin: 20px;
+  padding: 20px;
+`
+
+const BotBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: orange;
+  width: 100%;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+
+`
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -60,16 +87,18 @@ class App extends React.Component {
   render() {
     console.log('rendering...');
     return (
-      <React.Fragment >
-        <div>
+      <Container >
+        <TopBox>
           <h2>Welcome to your Todo App!</h2>
           <TodoForm addNewItem={this.addNewItem}/>
-        </div>
-        <TodoList items={this.state.TodoList} 
-                  toggleItem={this.toggleItem}
-                  onClick={this.clearCompleted}
-        />
-      </React.Fragment>
+        </TopBox>
+        <BotBox >
+          <TodoList items={this.state.TodoList} 
+                    toggleItem={this.toggleItem}
+                    onClick={this.clearCompleted}
+          />
+        </BotBox>
+      </Container>
     );
   }
 }
